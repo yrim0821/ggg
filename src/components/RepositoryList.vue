@@ -42,7 +42,6 @@ export default {
 
 			//this.repositories = response.data
 			this.repositories.push(response.data[0])
-			console.log(response.data[0])
 		},
 
 	}
