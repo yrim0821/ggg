@@ -3,8 +3,10 @@
     <v-layout>
 
       <v-flex xs8>
-        <a v-bind:href="repos.http_url_to_repo"><h2 v-line-clamp="1" class="font-weight-regular">{{repos.path_with_namespace}}</h2></a>
-        <p class="subheading mb-1 grey--text text--darken-1 font-weight-light">{{repos.namespace.name}}</p>
+        <a v-bind:href="repos.http_url_to_repo">
+			<h2 v-line-clamp="1" class="font-weight-regular">{{repos.path_with_namespace}}</h2>
+		</a>
+        <p class="subheading mb-1 grey--text text--darken-1 font-weight-light">{{repos.owner.name}}</p>
       </v-flex>
 
     </v-layout>
@@ -26,7 +28,7 @@ export default {
 		}
 	},
   mounted() {
-		this.drawStatGraph()
+		//this.drawStatGraph()
   },
 	methods: {
 		async drawStatGraph() {

@@ -12,11 +12,6 @@
 import Repository from '@/components/Repository'
 import GitlabService from '@/services/GitlabService'
 
-
-// $(function() {
-//   getGitlabRepos('dCp7MpuwFQNzYrLBZix5'); // 수경
-// });
-
 export default {
 	name: 'RepositoryList',
 	props: {
@@ -32,19 +27,22 @@ export default {
 		Repository
 	},
 	mounted() {
-		this.getGitlabRepos('5yRamVkqs4Z4bq-G1roY') // 내꺼
-    // 'hackurity01'
-
+		this.getGitlabRepos('myccpb08','5yRamVkqs4Z4bq-G1roY')
+		this.getGitlabRepos('Kim_yh', 'N9RKhWdxvbGzn3oYEwVe') 
+		this.getGitlabRepos('JIGyeongmin', 'yYcb5LEDsxxbN1PPxKEj')
+		this.getGitlabRepos('LeeSuKyeong','dCp7MpuwFQNzYrLBZix5')
+		this.getGitlabRepos('seok','xTftb51x12NTwFbxxAC5')
 	},
 	methods: {
-		async getGitlabRepos(userName) {
-			const response = await GitlabService.getRepos(userName)
+		async getGitlabRepos(userName, token) {
+			const response = await GitlabService.getRepos(userName, token)
 			if(response.status !== 200) {
 				return
 			}
-      //userName
 
-			this.repositories = response.data
+			//this.repositories = response.data
+			this.repositories.push(response.data[0])
+			console.log(response.data[0])
 		},
 
 	}

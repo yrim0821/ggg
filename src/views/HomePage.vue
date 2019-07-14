@@ -52,14 +52,13 @@
     </v-layout>
 
     <!-- 모바일  페이지에서는 그래프가 안 보이도록 -->
-    <v-layout my-5>
+    <v-layout my-5 v-show="$mq==='mobile' ? false : true">
       <v-flex xs12>
-        <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">그래프테스트</span>
+        <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">GRAPH</span>
         </h2>
         <gitgraph></gitgraph>
       </v-flex>
     </v-layout>
-  </v-if>
 
   </v-container>
 </div>
