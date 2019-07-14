@@ -165,10 +165,9 @@ export default {
 
       function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
-          var howmany = response.headers["x-total"]; // 전체 아이템 수 계산 (27)
-          var total_try = parseInt(howmany / 100) + 1; // 한 페이지에 100개니까 얼마나 요청 보내야 하는지 계산 (27/100 + 1)
+          var howmany = response.headers["x-total"];
+          var total_try = parseInt(howmany / 100) + 1;
 
-          // total_try 만큼 요청보내기
           for (var trying = 0; trying < total_try; trying++) {
             fetch(
               `${BASE_URL}/projects/6097/repository/commits??namespaces&per_page=100&page=${trying+1}&private_token=5yRamVkqs4Z4bq-G1roY`
