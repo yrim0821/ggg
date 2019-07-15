@@ -6,7 +6,7 @@ export default {
 	getRepos(userName, token) {
 		return Api(BASE_URL).get(`/users/${userName}/projects?private_token=${token}`)
 	},
-	
+
 	getCommits(fullName) {
 		let d = new Date()
 		d.setMonth(d.getMonth() - 1)

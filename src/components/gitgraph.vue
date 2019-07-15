@@ -126,7 +126,7 @@ export default {
         url: "https://lab.ssafy.com/api/v4/users/" + id + "/events",
         headers: headers
       };
-      
+
       function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
           var howmany = response.headers["x-total"];
@@ -148,7 +148,7 @@ export default {
                 })
                 drawChart(datass)
               });
-          } // for문 끝 요청부분 완료       
+          } // for문 끝 요청부분 완료
         }
       } // callback 함수 완료
       request(options, callback);
@@ -177,7 +177,6 @@ export default {
               })
               .then(data => {
                 this.ret = data;
-                console.log(data);
               });
           } // 요청부분 완료
         }

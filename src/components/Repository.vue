@@ -24,7 +24,10 @@
             <div :id="repos.owner.username" style="height: 250px; width: 90%;"></div>
            <!-- 미니그래프 테스트 끝 -->
            <v-divider></v-divider>
-             <!-- <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 <v-icon> arrow_downward</v-icon> </h4> -->
+             <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 More <v-btn fab small v-on:click="test2(flags, repos.owner.username)"> <v-icon> arrow_downward</v-icon></v-btn> </h4>
+              <ul v-if="flags">
+                <li v-for="n in three" style="font-size:20px">  {{ n }} </li>
+              </ul>
 
         </v-card-text>
 
@@ -110,6 +113,9 @@ export default {
     return {
       dialog : false,
       stats: {},
+      flags : false,
+      three : [],
+      link : [],
     };
   },
   mounted() {
@@ -157,6 +163,22 @@ export default {
 
     test(username) {
       this.getRepos(username, tokens[username]);
+    },
+
+    test2(flags,username) {
+      this.flags = !flags
+      this.getGitlabRepos(username, tokens[username])},
+
+    async getGitlabRepos(userName, token) {
+      const response = await GitlabService.getRepos(userName, token)
+      if(response.status !== 200) {
+        return
+      }
+      var ssample = [response.data[1].path_with_namespace,
+      response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
+
+      this.three = ssample
+
     },
     } //method
 }; // default
