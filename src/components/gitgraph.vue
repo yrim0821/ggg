@@ -26,7 +26,6 @@ function drawChart(datas) {
   var timeline = [];
   var cnt = [];
   var info = [];
-  var graph = {'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'11':0,'12':0}
 
   if (datas != undefined) {
     // datas 로 반복문 돌림
@@ -36,7 +35,6 @@ function drawChart(datas) {
 
       var year = new Date(data).getFullYear();
       var month = new Date(data).getMonth() + 1;
-        graph[month]++
       var day = new Date(data).getDate();
       var temp = year + "," + month + "," + day;
 
