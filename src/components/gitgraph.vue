@@ -170,7 +170,7 @@ export default {
 
           for (var trying = 0; trying < total_try; trying++) {
             fetch(
-              `${BASE_URL}/projects/6097/repository/commits??namespaces&per_page=100&page=${trying+1}&private_token=5yRamVkqs4Z4bq-G1roY`
+              `${BASE_URL}/projects/6097/repository/commits?namespaces&per_page=100&page=${trying+1}&private_token=5yRamVkqs4Z4bq-G1roY`
             )
               .then(res => {
                 return res.json();

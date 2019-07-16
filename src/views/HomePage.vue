@@ -10,9 +10,9 @@
       <v-flex class="aboutMe" :class="$mq" xs8>
         <h2 class="headline mb-3"><span style="font-family:'Jeju Hallasan' ; font-size:20pt">About Me</span></h2>
         <span style="font-family:'KHNPHU'">
-        <!-- <p class="mr-4" v-for ="item in data" v-if="item.where == item.info">{{ item.greeting }}<br></p> -->
-        <p class="mr-4" v-for ="item in data" v-if="item.where == item.info" v-html="item.greeting"><br></p>
-      </span>
+          <!-- <p class="mr-4" v-for ="item in data" v-if="item.where == item.info">{{ item.greeting }}<br></p> -->
+          <p class="mr-4" v-for="item in data" v-if="item.where == item.info" v-html="item.greeting"><br></p>
+        </span>
       </v-flex>
 
 
@@ -47,7 +47,14 @@
       <v-flex xs12>
         <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">Project</span>
         </h2>
-        <RepositoryList></RepositoryList>
+        <v-layout align-center>
+          <v-flex xs6 grow>
+            <RepositoryList></RepositoryList>
+          </v-flex>
+          <v-flex xs6 shrink class="show-on-scroll">
+            <membersgraph></membersgraph>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
 
@@ -71,8 +78,9 @@ import PostList from '../components/PostList'
 import RepositoryList from '../components/RepositoryList'
 import Repository from '../components/Repository'
 import gitgraph from '../components/gitgraph'
+import membersgraph from '../components/membersgraph'
 
-var country = navigator.language.substr(0,2)
+var country = navigator.language.substr(0, 2)
 
 var korea = "안녕하세요, 교육이수중입니다<br>코딩은 이곳에서 처음 배웠습니다<br>이 사이트는 한국어기반으로 로딩되었습니다"
 var english = "Hi ssafy. <br> This page is loaded on English"
@@ -85,7 +93,8 @@ export default {
     PostList,
     RepositoryList,
     Repository,
-    gitgraph
+    gitgraph,
+    membersgraph
   },
   methods: {
     getImgUrl(img) {
@@ -93,30 +102,50 @@ export default {
     }
   },
 
-  data()
-  {
-    return{
+  data() {
+    return {
       data: [{
-        where: 'ko',
-        greeting: korea,
-        info : country
-      },
-      {
-        where: 'en',
-        greeting: english,
-        info : country}],
+          where: 'ko',
+          greeting: korea,
+          info: country
+        },
+        {
+          where: 'en',
+          greeting: english,
+          info: country
+        }
+      ],
 
-      info : country
+      info: country
     }
   }
 }
 
+window.addEventListener('scroll', function() {
+  var el = document.querySelector('.show-on-scroll');
 
+  if(window.scrollY >= 2000 && window.scrollY < 2500){
+    el.classList.add('shown');
+  }
+  else el.classList.remove('shown');
+
+});
 </script>
 
 <style>
-@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css); .jejuhallasan * { font-family: 'Jeju Hallasan', cursive; }
-@font-face { font-family: 'KHNPHU'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHU.woff') format('woff'); font-weight: normal; font-style: normal; }
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+
+.jejuhallasan * {
+  font-family: 'Jeju Hallasan', cursive;
+}
+
+@font-face {
+  font-family: 'KHNPHU';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHU.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .profileImg.mobile {
   display: none;
 }
@@ -130,4 +159,8 @@ export default {
 .my-5 {
   font-size: 1.7vw;
 }
+
+.show-on-scroll { visibility: hidden; }
+.show-on-scroll.shown { visibility: visible; }
+
 </style>

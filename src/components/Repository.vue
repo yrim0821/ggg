@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex xs8>
         <a v-bind:href="repos.http_url_to_repo">
-          <h2 v-line-clamp="1" class="font-weight-regular">{{repos.path_with_namespace}}</h2>
+          <h4 v-line-clamp="1" class="font-weight-regular">{{repos.path_with_namespace}}</h4>
         </a>
 
         <!-- dialog 테스트 -->
@@ -25,6 +25,7 @@
            <!-- 미니그래프 테스트 끝 -->
            <v-divider></v-divider>
              <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 More <v-btn fab small v-on:click="test2(flags, repos.owner.username)"> <v-icon> arrow_downward</v-icon></v-btn> </h4>
+              <div class="mt-0" v-if="flags"> <h5>전체 작업 프로젝트 : {{ totallength }} 개 </h5></div>
               <ul v-if="flags">
                 <li v-for="n in three" style="font-size:20px">  {{ n }} </li>
               </ul>
@@ -116,6 +117,7 @@ export default {
       flags : false,
       three : [],
       link : [],
+      totallength:0,
     };
   },
   mounted() {
@@ -174,8 +176,8 @@ export default {
       if(response.status !== 200) {
         return
       }
-      var ssample = [response.data[1].path_with_namespace,
-      response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
+      this.totallength = response.data.length
+      var ssample = [response.data[1].path_with_namespace,response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
 
       this.three = ssample
 
