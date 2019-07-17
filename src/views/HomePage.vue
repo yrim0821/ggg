@@ -4,21 +4,28 @@
     <div style="line-height:1.2em; font-family:'Jeju Hallasan'; font-size:60pt ;
     text-shadow: 5px 5px 3px rgb(255,255,255)" slot="text">MY SITE<br></div>
   </ImgBanner>
+
   <v-container>
     <!-- About Me -->
-    <v-layout my-5 id="ttest">
-      <v-flex class="aboutMe" :class="$mq" xs8>
+    <v-layout row wrap my-5 id="ttest" style="text-align:center">
+      <v-flex xs12 class="aboutMe" :class="$mq">
         <h2 class="headline mb-3"><span style="font-family:'Jeju Hallasan' ; font-size:20pt">About Me</span></h2>
-        <span style="font-family:'KHNPHU'">
-          <!-- <p class="mr-4" v-for ="item in data" v-if="item.where == item.info">{{ item.greeting }}<br></p> -->
-          <p class="mr-4" v-for="item in data" v-if="item.where == item.info" v-html="item.greeting"><br></p>
-        </span>
       </v-flex>
 
+      <v-flex xs12 span style="text-align:left">
+      <v-carousel>
+        <!-- <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"> -->
+        <v-carousel-item v-for="(item,i) in items" :sentence="item.sentece">
+                {{ item.sentence }}
 
-      <v-flex class="profileImg" :class="$mq" xs4>
-        <v-img :src="getImgUrl('me.jpg')" aspect-ratio="1.5" />
-      </v-flex>
+
+
+          <v-flex class="profileImg" :class="$mq" xs4>
+            <v-img :src="getImgUrl('me.jpg')" aspect-ratio="1.5" />
+          </v-flex>
+        </v-carousel-item>
+      </v-carousel>
+    </v-flex xs12>
     </v-layout>
 
     <!-- Portfolio -->
@@ -45,11 +52,19 @@
     <!-- Github -->
     <v-layout my-5>
       <v-flex xs12>
-        <h2 class="headline my-5 text-xs-center"><span style="font-family:'Jeju Hallasan' ; font-size:25pt">Project</span>
+        <h2 class="headline my-5 text-xs-center"><span style="font-size:25pt;">Project</span>
         </h2>
-        <v-layout align-center>
+        <v-layout column v-if="$mq==='mobile'">
+          <v-flex xs12>
+            <RepositoryList class="notranslate"></RepositoryList>
+          </v-flex>
+          <v-flex xs12 class="show-on-scroll">
+            <membersgraph></membersgraph>
+          </v-flex>
+        </v-layout>
+        <v-layout v-else align-center>
           <v-flex xs6 grow>
-            <RepositoryList></RepositoryList>
+            <RepositoryList class="notranslate"></RepositoryList>
           </v-flex>
           <v-flex xs6 shrink class="show-on-scroll">
             <membersgraph></membersgraph>
@@ -80,11 +95,6 @@ import Repository from '../components/Repository'
 import gitgraph from '../components/gitgraph'
 import membersgraph from '../components/membersgraph'
 
-var country = navigator.language.substr(0, 2)
-
-var korea = "안녕하세요, 교육이수중입니다<br>코딩은 이곳에서 처음 배웠습니다<br>이 사이트는 한국어기반으로 로딩되었습니다"
-var english = "Hi ssafy. <br> This page is loaded on English"
-
 export default {
   name: 'HomePage',
   components: {
@@ -104,32 +114,23 @@ export default {
 
   data() {
     return {
-      data: [{
-          where: 'ko',
-          greeting: korea,
-          info: country
+      items: [{
+          sentence:'안녕',
+          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
         },
-        {
-          where: 'en',
-          greeting: english,
-          info: country
+        {sentence:'하세',
+          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+        },
+        {sentence:'요',
+          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+        },
+        {sentence:'잉',
+          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
         }
-      ],
-
-      info: country
+      ]
     }
   }
 }
-
-window.addEventListener('scroll', function() {
-  var el = document.querySelector('.show-on-scroll');
-
-  if(window.scrollY >= 2000 && window.scrollY < 2500){
-    el.classList.add('shown');
-  }
-  else el.classList.remove('shown');
-
-});
 </script>
 
 <style>
@@ -159,8 +160,5 @@ window.addEventListener('scroll', function() {
 .my-5 {
   font-size: 1.7vw;
 }
-
-.show-on-scroll { visibility: hidden; }
-.show-on-scroll.shown { visibility: visible; }
 
 </style>

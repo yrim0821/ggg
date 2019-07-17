@@ -88,15 +88,19 @@ function calendar(datas,id){
 function mini(data,id) {
 var chart = new CanvasJS.Chart(id, {
   animationEnabled: true,
+  axisY:{
+  gridColor: "white"
+},
   data: [{
     yValueFormatString: "#,###",
     xValueFormatString: "#,###",
     type: "spline",
-    lineColor: "blue",
+    lineColor: "#6a60a9",
     dataPoints: data,
     lineThickness: 5,
      markerType:'circle',
-     markerColor:'red'
+     markerSize : 4,
+     markerColor:'#dedcee'
   }]
 
 });
