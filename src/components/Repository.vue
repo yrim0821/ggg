@@ -25,10 +25,89 @@
            <!-- 미니그래프 테스트 끝 -->
            <v-divider></v-divider>
              <h4 class="mt-3">{{ repos.owner.name }}님 프로젝트 More <v-btn fab small v-on:click="test2(flags, repos.owner.username)"> <v-icon> arrow_downward</v-icon></v-btn> </h4>
-              <div class="mt-0" v-if="flags"> <h5>전체 작업 프로젝트 : {{ totallength }} 개 </h5></div>
-              <ul v-if="flags">
-                <li v-for="n in three" style="font-size:20px">  {{ n }} </li>
-              </ul>
+              <div class="mt-0" v-if="flags">
+
+                  <!-- 테스트 -->
+                  <v-card class="mx-auto" max-width="1000">
+
+                    <v-card dark flat>
+                      <v-card-title class="pa-2 purple lighten-3">
+                        <h3 class="title font-weight-light text-xs-left grow">전체 작업 프로젝트 : {{ totallength }} 개</h3>
+                      </v-card-title>
+                    </v-card>
+
+                    <v-card-text class="py-0">
+                      <v-timeline align-top dense>
+                        <v-timeline-item color="pink"small>
+                          <v-layout pt-3>
+                            <v-flex xs3>
+                              <strong>{{ when[0] }}</strong>
+                            </v-flex>
+                            <v-flex>
+                              <strong>{{ three[0] }}</strong>
+                            </v-flex>
+                          </v-layout>
+                        </v-timeline-item>
+
+                        <v-timeline-item
+                          color="teal lighten-3"
+                          small
+                        >
+                          <v-layout wrap pt-3>
+                            <v-flex xs3>
+                              <strong>{{ when[0] }}</strong>
+                            </v-flex>
+                            <v-flex>
+                              <strong>{{ three[1] }}</strong>
+
+                            </v-flex>
+                          </v-layout>
+                        </v-timeline-item>
+
+                        <v-timeline-item
+                          color="pink"
+                          small
+                        >
+                          <v-layout pt-3>
+                            <v-flex xs3>
+                              <strong>{{ when[0] }}</strong>
+                            </v-flex>
+                            <v-flex>
+                              <strong>{{ three[2] }}</strong>
+                            </v-flex>
+                          </v-layout>
+                        </v-timeline-item>
+
+                        <v-timeline-item
+                          color="teal lighten-3"
+                          small
+                        >
+                          <v-layout pt-3>
+                            <v-flex xs3>
+                              <strong>{{ when[0] }}</strong>
+                            </v-flex>
+                            <v-flex>
+                              <strong>{{ three[3] }}</strong>
+                            </v-flex>
+                          </v-layout>
+                        </v-timeline-item>
+                      </v-timeline>
+                    </v-card-text>
+                  </v-card>
+
+
+
+
+                  <!-- 테스트 끝 -->
+
+
+
+
+
+
+
+              </div>
+
 
         </v-card-text>
 
@@ -121,6 +200,7 @@ export default {
       flags : false,
       three : [],
       link : [],
+      when : [],
       totallength:0,
     };
   },
@@ -181,9 +261,10 @@ export default {
         return
       }
       this.totallength = response.data.length
-      var ssample = [response.data[1].path_with_namespace,response.data[2].path_with_namespace,response.data[3].path_with_namespace ]
-
+      var ssample = [response.data[1].path_with_namespace,response.data[2].path_with_namespace,response.data[3].path_with_namespace,response.data[4].path_with_namespace ]
+      var wwhen = [response.data[1].created_at.substring(2,10),response.data[2].created_at.substring(2,10),response.data[3].created_at.substring(2,10),response.data[4].created_at.substring(2,10) ]
       this.three = ssample
+      this.when = wwhen
 
     },
     } //method

@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-  
+
 </div>
 
 </template>
@@ -66,7 +66,7 @@ function draw(drawing) {
     },
     axisY: {
       title: "Contribution",
-      includeZero: false
+      includeZero: true
     },
     data: [{
       type: "column",

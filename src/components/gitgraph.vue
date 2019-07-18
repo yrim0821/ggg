@@ -21,7 +21,7 @@ google.charts.setOnLoadCallback(drawChart);
 
 // https://developers.google.com/chart/interactive/docs/gallery/calendar
 function drawChart(datas) {
-  let personal_title =  datas[0].author.name + " " + datas[0].author.username ;
+
   var dataTable = new google.visualization.DataTable();
   var timeline = [];
   var cnt = [];
@@ -30,6 +30,7 @@ function drawChart(datas) {
   if (datas != undefined) {
     // datas 로 반복문 돌림
     for (let index = 0; datas[index] != null; index++) {
+      let personal_title =  datas[0].author.name + " " + datas[0].author.username ;
       var data = datas[index].created_at;
       if (data == null) continue;
 
